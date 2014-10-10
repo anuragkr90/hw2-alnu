@@ -1,0 +1,80 @@
+package edu.cmu.deiis.types;
+
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.util.Set;
+import java.util.Iterator;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import org.apache.uima.UIMARuntimeException;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.FSIterator;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.TOP;
+import org.apache.uima.resource.ResourceInitializationException;
+
+import abner.Tagger;
+
+public class NewJCasAnnotatorAb extends JCasAnnotator_ImplBase {
+
+  Tagger mdl;
+  @Override
+  public void initialize(UimaContext aContext) throws ResourceInitializationException{
+    try{
+      mdl = new Tagger();
+    } catch(Exception e) {
+      throw new UIMARuntimeException(e);
+    }
+  }
+  public void process(JCas arg0) throws AnalysisEngineProcessException {
+    // TODO Auto-generated method stub
+
+    
+    FSIterator iterator = arg0.getJFSIndexRepository().getAllIndexedFS(SentTS.type);
+    SentTS sent = (SentTS) iterator.next();
+    
+    String actSent = sent.getSentence();
+    
+    String[][] recEnt = mdl.getEntities(actSent);
+    
+    for(String ent : recEnt[0]){
+      
+      Pattern pt = Pattern.compile(Pattern.quote(ent));
+      Matcher mt = pt.matcher(actSent);
+      
+      while(mt.find()){
+        
+        NamedTS newne = new NamedTS(arg0);
+        int st = mt.start();
+        int ed = st+ent.length();
+        
+        int bgn = nonwhitespace((String)sent.getSentence(), st);
+        int nd  = nonwhitespace((String)sent.getSentence(), ed);
+        
+        newne.setBegin(bgn);
+        newne.setEnd(nd-1);
+        newne.setNE((String)sent.getSentence().substring(st, ed));
+        newne.addToIndexes();
+        
+      }
+      
+    }
+    
+  }
+  private static int nonwhitespace(String str, int id) {
+    /*
+     * finding number of characters before whitespace
+     */
+    
+    int idx_notspace = 0;
+    for(int i = 0; i < id; i++) {
+    if(str.charAt(i) != ' ')
+    idx_notspace++;
+    }
+    return idx_notspace;
+    }
+
+}
