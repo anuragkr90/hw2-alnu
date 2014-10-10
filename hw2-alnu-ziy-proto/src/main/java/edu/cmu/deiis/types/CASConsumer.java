@@ -48,6 +48,7 @@ public class CASConsumer extends CasConsumer_ImplBase {
      * Gets sentence id from from "Annotated"
      * Gets begin , end and Named Entity from "stringN"
      * Writes them through the created buffered writer
+     * The output is union of the two analysis engine. This is finally written in the output file
      */
     JCas jacas = null;
     try {

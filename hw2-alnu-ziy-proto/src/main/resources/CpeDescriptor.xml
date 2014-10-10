@@ -2,14 +2,14 @@
     <collectionReader>
         <collectionIterator>
             <descriptor>
-                <import location="collectionReaderDescriptor.xml"/>
+                <import location="descriptors/collectionReaderDescriptor.xml"/>
             </descriptor>
         </collectionIterator>
     </collectionReader>
     <casProcessors casPoolSize="3" processingUnitThreadCount="1">
         <casProcessor deployment="integrated" name="FeatureExtractorDescriptor">
             <descriptor>
-                <import location="aggregateAEDescriptor.xml"/>
+                <import location="descriptors/aggregateAEDescriptor.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>
@@ -21,7 +21,7 @@
         </casProcessor>
         <casProcessor deployment="integrated" name="Annotation Printer">
             <descriptor>
-                <import location="casConsumerDescriptor.xml"/>
+                <import location="descriptors/casConsumerDescriptor.xml"/>
             </descriptor>
             <deploymentParameters/>
             <errorHandling>

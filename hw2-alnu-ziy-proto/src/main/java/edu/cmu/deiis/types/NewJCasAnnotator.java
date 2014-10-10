@@ -33,8 +33,9 @@ public class NewJCasAnnotator extends JCasAnnotator_ImplBase {
     
     try{
       
-      File fl =new File(this.getClass().getClassLoader().getResource((String)aContext.getConfigParameterValue("modelfilename")).getFile());
-      mdl = (ConfidenceChunker) AbstractExternalizable.readObject(fl);      
+      //File fl =new File(this.getClass().getClassLoader().getResource((String)aContext.getConfigParameterValue("modelfilename")).getFile());
+      //mdl = (ConfidenceChunker) AbstractExternalizable.readObject(fl);
+      mdl = (ConfidenceChunker) AbstractExternalizable.readResourceObject(NewJCasAnnotator.class,(String) aContext.getConfigParameterValue("modelfilename"));
     } catch (Exception e){
       throw new UIMARuntimeException(e);
     }
@@ -71,7 +72,10 @@ public class NewJCasAnnotator extends JCasAnnotator_ImplBase {
       newne.setEnd(nd-1);
       newne.setNE((String)sent.getSentence().substring(st, ed));
       newne.setConfidence(Math.pow(2.0, ch.score()));
-      if (newne.getConfidence() >= 0.6)
+      /*
+       * Consider only if confidence is greater than 0.6
+       */
+      if ((newne.getConfidence() >= 0.6))
         newne.addToIndexes();
     
     }

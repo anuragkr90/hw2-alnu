@@ -24,6 +24,9 @@ public class NewJCasAnnotatorAb extends JCasAnnotator_ImplBase {
   @Override
   public void initialize(UimaContext aContext) throws ResourceInitializationException{
     try{
+      /*
+       * Initialize the abner tagger
+       */
       mdl = new Tagger();
     } catch(Exception e) {
       throw new UIMARuntimeException(e);
@@ -54,16 +57,30 @@ public class NewJCasAnnotatorAb extends JCasAnnotator_ImplBase {
         int bgn = nonwhitespace((String)sent.getSentence(), st);
         int nd  = nonwhitespace((String)sent.getSentence(), ed);
         
+        //String actner =  (String)sent.getSentence().substring(st, ed);
+        
         newne.setBegin(bgn);
         newne.setEnd(nd-1);
         newne.setNE((String)sent.getSentence().substring(st, ed));
-        newne.addToIndexes();
+        /*
+         * Consider only if the length of named entity is more than 8
+         */
+        if(newne.getNE().length() >= 8)
+          newne.addToIndexes();
         
       }
       
     }
     
   }
+  //private static String manghyph(String str){
+   // String editstr = str.charAt[0];
+  //  int i = 1;
+   //while(i <= str.length()-2){
+   //   if(((str.charAt(i) == '-') && (str.charAt(i-1) == ' ')) || ((str.charAt(i) == '-') && (str.charAt(i-1) == ' ')))
+    //    editstr =editstr + '-';
+   // }
+  //}
   private static int nonwhitespace(String str, int id) {
     /*
      * finding number of characters before whitespace

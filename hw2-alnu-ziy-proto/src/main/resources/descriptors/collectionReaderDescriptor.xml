@@ -19,7 +19,7 @@
       <nameValuePair>
         <name>inputpath</name>
         <value>
-          <string>src/main/resources/inputData/sample.in</string>
+          <string>hw2.in</string>
         </value>
       </nameValuePair>
     </configurationParameterSettings>
