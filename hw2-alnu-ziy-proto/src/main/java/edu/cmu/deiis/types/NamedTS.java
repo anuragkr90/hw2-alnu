@@ -12,30 +12,30 @@ import org.apache.uima.jcas.cas.TOP_Type;
 /** 
  * Updated by JCasGen Wed Oct 08 19:37:08 EDT 2014
  * XML source: /home/anurag/git/hw2-alnu/hw2-alnu-ziy-proto/src/main/resources/descriptors/deiis_types.xml
- * @generated */
+ *  */
 public class NamedTS extends Annotation {
-  /** @generated
-   * @ordered 
+  /** 
+   *  
    */
   @SuppressWarnings ("hiding")
   public final static int typeIndexID = JCasRegistry.register(NamedTS.class);
-  /** @generated
-   * @ordered 
+  /** 
+   *  
    */
   @SuppressWarnings ("hiding")
   public final static int type = typeIndexID;
-  /** @generated
+  /** 
    * @return index of the type  
    */
   @Override
   public              int getTypeIndexID() {return typeIndexID;}
  
   /** Never called.  Disable default constructor
-   * @generated */
+   *  */
   protected NamedTS() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
-   * @generated
+   * 
    * @param addr low level Feature Structure reference
    * @param type the type of this Feature Structure 
    */
@@ -44,7 +44,7 @@ public class NamedTS extends Annotation {
     readObject();
   }
   
-  /** @generated
+  /** 
    * @param jcas JCas to which this Feature Structure belongs 
    */
   public NamedTS(JCas jcas) {
@@ -52,7 +52,7 @@ public class NamedTS extends Annotation {
     readObject();   
   } 
 
-  /** @generated
+  /** 
    * @param jcas JCas to which this Feature Structure belongs
    * @param begin offset to the begin spot in the SofA
    * @param end offset to the end spot in the SofA 
@@ -69,7 +69,7 @@ public class NamedTS extends Annotation {
    * Write your own initialization here
    * <!-- end-user-doc -->
    *
-   * @generated modifiable 
+   *  modifiable 
    */
   private void readObject() {/*default - does nothing empty block */}
      
@@ -79,7 +79,7 @@ public class NamedTS extends Annotation {
   //* Feature: NE
 
   /** getter for NE - gets 
-   * @generated
+   * 
    * @return value of the feature 
    */
   public String getNE() {
@@ -88,7 +88,7 @@ public class NamedTS extends Annotation {
     return jcasType.ll_cas.ll_getStringValue(addr, ((NamedTS_Type)jcasType).casFeatCode_NE);}
     
   /** setter for NE - sets  
-   * @generated
+   * 
    * @param v value to set into the feature 
    */
   public void setNE(String v) {
